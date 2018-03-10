@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" routerLink="">Ng-Auth</a>
+  <button class="navbar-toggler" data-target="#navbarsExampleDefault" data-toggle="collapse" type="button" aria-controls="navbarsExampleDefault"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="nav-link" routerLink="">Home
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="nav-link" routerLink="/courses-list">Courses</a>
+      </li>
+    </ul>
+    <span class="navbar-text" *ngIf="authService.user | async">Welcome {{ (authService.user | async)?.email }}!</span>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" *ngIf="!(authService.user | async)" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="nav-link" routerLink="/login">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="!(authService.user | async)" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="nav-link" routerLink="/signup">Signup</a>
+      </li>
+      <li class="nav-item" *ngIf="authService.user | async">
+        <a style="cursor: pointer;" class="nav-link" (click)="authService.logout()">Logout</a>
+      </li>
+      <!--
+      <li class="nav-item dropdown" ngbDropdown *ngIf="authService.user | async">
+        <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" ngbDropdownToggle>Welcome {{ (authService.user | async)?.email }}!</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01" ngbDropdownMenu>
+          <a class="dropdown-item" href="#">Angular</a>
+          <a class="dropdown-item" href="#">React</a>
+          <a class="dropdown-item" href="#">Vue.js</a>
+        </div>
+      </li>
+    -->
+    </ul>
+  </div>
+</nav>
